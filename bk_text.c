@@ -704,7 +704,7 @@ static void text_heading(textfile *tf, word *tprefix, word *nprefix,
 	    margin = (indent + width - length)/2;
 	    if (margin < 0) margin = 0;
 	}
-	text_output_many(tf, margin, L' ');
+        text_output(tf, L"#");
 	text_output(tf, t.text);
 	text_output(tf, L"\n");
 	if (*align.underline) {
@@ -786,6 +786,7 @@ static void text_codepara(textfile *tf, word *text, int indent, int width) {
 	int wid = ustrwid(text->text, tf->charset);
 	if (wid > width)
 	    err_text_codeline(tf->es, &text->fpos, wid, width);
+        text_output(tf, L">> ");
 	text_output_many(tf, indent, L' ');
 	text_output(tf, text->text);
 	text_output(tf, L"\n");
