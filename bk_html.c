@@ -1123,6 +1123,19 @@ static void html_backend_common(paragraph *sourceform, keywordlist *keywords,
 	    }
 	    html_nl(&ho);
 
+            {
+                rdstringc rs = { 0, 0, NULL };
+                rdaddsc(&rs, "Halibut, ");
+                rdaddsc(&rs, version);
+                if (rs.text) {
+                    element_empty(&ho, "meta");
+                    element_attr(&ho, "name", "generator");
+                    element_attr(&ho, "content", rs.text);
+                    html_nl(&ho);
+                    sfree(rs.text);
+                }
+	    }
+
 	    if (conf.author) {
 		element_empty(&ho, "meta");
 		element_attr(&ho, "name", "author");
